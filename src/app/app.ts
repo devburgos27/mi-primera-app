@@ -15,11 +15,12 @@ export class App {
   contador = signal(0);
   totalClicks = signal(0);
   
-    cambiarMensaje() {
-    this.mensaje = this.mensaje === 'Mi primera aplicación Angular' 
+cambiarMensaje() {
+    this.mensaje.set(
+      this.mensaje() === 'Mi primera aplicación Angular' 
       ? '¡Angular 20 es genial!' 
-      : 'Mi primera aplicación Angular';
-    this.contador++;
+      : 'Mi primera aplicación Angular');
+    this.contador.update ( v => v + 1 );
   }
   // Computed signal para estadísticas
   estadisticas = computed(() => {
@@ -31,8 +32,8 @@ export class App {
     return '¡Dominando Angular!';
   });
   
-  onContadorCambio(nuevoValor: number) {
-    this.totalClicks++;
+onContadorCambio(nuevoValor: number) {
+    this.totalClicks.update ( v => v + 1 );
     console.log('Contador cambió a:', nuevoValor);
   }
 }
